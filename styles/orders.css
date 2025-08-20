@@ -1,0 +1,159 @@
+.table-container {
+  width: 90%;
+  max-width: 1200px; 
+  margin: 2rem auto; 
+  padding: 1rem;
+  background-color: #1e1e1e;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0, 255, 200, 0.2);
+  box-shadow: 0 0 10px rgba(227, 3, 3, 0.2);
+  overflow-x: auto; 
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  color: #f5f5f5;
+  background-color: #2c2c2c;
+  border-radius: 8px;
+  overflow: hidden;
+  table-layout: fixed; 
+  text-align: center; 
+}
+
+.table thead {
+  background-color: #307375;
+  color: #d8d5d5;
+  font-size: 0.86rem;
+}
+
+.table th,
+.table td {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid #8d0000;
+  word-wrap: break-word; 
+  font-size: 0.79rem;
+}
+
+.table tbody tr:hover {
+  background-color: #383838;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+
+#button-order-update,
+#button-order-delete {
+  background-color: #03dac6;
+  color: rgb(38, 37, 37);
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+#button-order-delete {
+  background-color: #f44336;
+  color: white;
+}
+
+@media screen and (max-width: 768px) {
+  .table-container {
+    width: 100%;
+    overflow-x: auto;
+  }
+
+  .table th,
+  .table td {
+    padding: 0.5rem;
+    font-size: 0.9rem;
+  }
+}
+
+
+
+/* buat si update */
+.overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* Box popup */
+.popup-box-update {
+  background: rgb(99, 62, 146);
+  padding: 30px;
+  border-radius: 10px;
+  width: 300px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  animation: fadeIn 0.3s ease-in-out;
+
+}
+
+/* Tombol close */
+.close-btn {
+  background: red;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  margin-top: 15px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+/* buat si order */
+/* Overlay latar belakang */
+.overlay-order-update {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* Box popup */
+.popup-box-order-update {
+  background: rgb(99, 62, 146);
+  padding: 30px;
+  border-radius: 10px;
+  width: 300px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  animation: fadeIn 0.3s ease-in-out;
+
+}
+
+/* Tombol close */
+.close-btn-order-update {
+  background: red;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  margin-top: 15px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
