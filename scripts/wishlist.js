@@ -51,14 +51,14 @@ function updateWishlist(productId, priority, notes, amount, waktuProduct) {
   console.log(waktuProduct);
   document.querySelector(".popup-box-update-wishlist").innerHTML = `
         <form action="wishlist.php" method="POST">
-            <label for="product_id_baru">Id Product:</label><br>
-            <input type="number" name="product_id_baru" id="product_id_baru" value="${productId}"><br><br>
-            <label for="amount-order">Jumlah:</label><br>
-            <input type="number" id="amount-order" name="amount-order" value="${amount}" required><br><br>
-            <label for="priority-wishlist">priority:</label><br>
-            <input type="number" id="priority-wishlist" name="priority" value="${priority}" required><br><br>
-            <label for="note">Notes:</label><br>
-            <input type="text" id="note" name="note" value="${notes}" required><br><br>
+            <label for="product_id_baru">Id Product:</label>
+            <input type="number" name="product_id_baru" id="product_id_baru" value="${productId}">
+            <label for="amount-order">Jumlah:</label>
+            <input type="number" id="amount-order" name="amount-order" value="${amount}" required>
+            <label for="priority-wishlist">priority:</label>
+            <input type="number" id="priority-wishlist" name="priority" value="${priority}" required>
+            <label for="note">Notes:</label>
+            <input type="text" id="note" name="note" value="${notes}" required>
             <input type="hidden" name="format-date" value="${date}">
             <input type="hidden" name="waktu-product" value="${waktuProduct}">
             <input type="hidden" name="product_id_lama" value="${productId}">

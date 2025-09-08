@@ -13,10 +13,11 @@ body {
 
 .navbar {
   background-color: #1f1f1f;
+  /* background-color: #672d2d; */
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 3rem 4rem;
+  padding: 2rem 2rem;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
   position: sticky;
   top: 0;

@@ -1,5 +1,31 @@
 console.log("ini dari index.js");
 
+// membuat fungsi ketika tombo button add product di klik
+
+const imgInput = document.getElementById("img");
+const previewImg = document.getElementById("preview-image");
+
+imgInput.addEventListener("change", function () {
+  const file = this.files[0];
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = function (e) {
+      previewImg.src = e.target.result;
+      previewImg.style.display = "block"; // tampilkan gambar
+    };
+    reader.readAsDataURL(file);
+  } else {
+    previewImg.style.display = "none"; // kalau batal pilih gambar
+  }
+});
+function bukaAddProduct() {
+  document.getElementById("popup-add-product").style.display = "flex";
+}
+
+function tutupAddProduct() {
+  document.getElementById("popup-add-product").style.display = "none";
+}
+
 function buatOrder(productId) {
   // nah yang ini kita kirim ke file orders.php
   document.getElementById("popup-order").style.display = "flex";
@@ -40,7 +66,7 @@ function buatWishlist(productId) {
             </form>
     `;
   console.log("ini add to wishlist");
-   const popup = document.getElementById("popup-wishlist");
+  const popup = document.getElementById("popup-wishlist");
   console.log("Inner HTML:", popup.innerHTML);
 }
 
@@ -56,7 +82,7 @@ function pasBukaInfo(idDariButton) {
   document.getElementById("popup").style.display = "flex";
   // nah jadi ketika ada yg klik button, maka akan kita ambil disini
   // si valuenya
-    if (window.navigator.vibrate) {
+  if (window.navigator.vibrate) {
     window.navigator.vibrate(50);
   }
 
@@ -84,10 +110,9 @@ function pasBukaInfo(idDariButton) {
     });
 }
 
-
 // ini untuk favorite
 
-function buatFavorite(produkId){
+function buatFavorite(produkId) {
   document.getElementById("popup-favorite").style.display = "flex";
 
   document.querySelector(".popup-box-favorite").innerHTML = `
@@ -101,7 +126,6 @@ function buatFavorite(produkId){
     `;
 }
 
-function tutupFavorite(){
- document.getElementById("popup-favorite").style.display = "none"; 
+function tutupFavorite() {
+  document.getElementById("popup-favorite").style.display = "none";
 }
-

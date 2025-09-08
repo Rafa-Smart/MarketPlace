@@ -51,14 +51,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["id"])) {
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>favorite Page</title>
   <link rel="stylesheet" href="../styles/favorite.css?v=5">
-  <link rel="stylesheet" href="../styles/navbar.css">
+  <link rel="stylesheet" href="../styles/navbar.css?v=2">
 
 </head>
 <body>
 
 
   <nav class="navbar">
-    <div class="logo">MyDarkShop</div>
+    <div class="logo">Khadafi Shop</div>
     <ul class="nav-links">
       <li><a href="../index.php">Products</a></li>
       <li><a href="orders.php">Orders</a></li>
@@ -194,38 +194,49 @@ function tampilProducts(){
         return;
     }
     while($row = mysqli_fetch_assoc($hasil)){
-        $product_id = $row["idProduct"];
-        $product_name = $row["namaProduct"];
-        $product_price = $row["priceProduct"];
-        $product_amount = $row["amountProduct"];
-        $product_img = $row["imgProduct"];
-        $created_at = $row["created_at"];
+    $product_id = $row["idProduct"];
+    $product_name = $row["namaProduct"];
+    $product_price = $row["priceProduct"];
+    $product_amount = $row["amountProduct"];
+    $product_img = $row["imgProduct"];
+    $created_at = $row["created_at"];
 
-        echo '<div class="product-card">';
-        echo '<img src="' . $product_img . '" alt="Product">';
-        echo '<h3>' . htmlspecialchars($product_name) . '</h3>';
-        echo '<p>Rp ' . number_format($product_price, 0, ',', '.') . '</p>';
-        echo '<div class="btn-group">';
-        // disini kita kirim productidnya ke si fungsi ini
-        echo '<button type="submit" name="order-now" class="btn order" onclick="buatOrderFavorite('. $product_id .')">Order Now</button>';
-        echo '<button type="button" name="add-to-wishlist" class="btn order" onclick="buatWishlist('. $product_id .')">Add to Wishlist</button>';
-        echo '<button id="info" onclick="pasBukaInfoFavorite('. $product_id .')" class="btn order" >Detail Favorite</button>';
-        echo "<div id='group-button-update-delete' style='display:flex;'>";
-       echo '<button id="button-order-update" onclick="updateFavorite('
-           . $product_id . ', '
-           . $product_amount . ', '
-           . htmlspecialchars(json_encode($created_at), ENT_QUOTES, 'UTF-8')
-           . ')">Update</button>';
+    echo '<div class="product-card">';
+    echo '<img src="' . $product_img . '" alt="Product">';
+    echo '<h3>' . htmlspecialchars($product_name) . '</h3>';
+    echo '<p>Rp ' . number_format($product_price, 0, ',', '.') . '</p>';
+    echo '<div class="btn-group">';
+    // tombol lain
+    echo '<button type="submit" name="order-now" class="btn order" onclick="buatOrderFavorite('. $product_id .')">Order Now</button>';
+    echo '<button type="button" name="add-to-wishlist" class="btn order" onclick="buatWishlist('. $product_id .')">Add to Wishlist</button>';
+    echo '<button id="info" onclick="pasBukaInfoFavorite('. $product_id .')" class="btn order">Detail Favorite</button>';
 
-        echo "<form action='' method='POST'>
-                  <input type='hidden' name='created_at' value='$created_at'>
-                  <input type='hidden' name='idProduct' value='$product_id'>
-                  <button type='submit' id='button-order-delete' name='favorite-delete' >Delete</button>
-              </form>";
-        echo "</div>"; // si button
-        echo '</div>'; // si btn-goroup
-        echo '</div>'; // si productcart
-    }
+    echo "<div id='group-button-update-delete' style='display:flex; gap:8px; margin-top:6px;'>";
+
+    // ✅ Tombol Update dengan warna #03dac6
+    echo '<button id="button-order-update"
+                 style="background-color:#379a6dff; color:#fff; border:none; padding:6px 20px; border-radius:4px; cursor:pointer;"
+                 onclick="updateFavorite('
+        . $product_id . ', '
+        . $product_amount . ', '
+        . htmlspecialchars(json_encode($created_at), ENT_QUOTES, 'UTF-8')
+        . ')">Update</button>';
+
+    // ✅ Tombol Delete dengan warna #f44336
+    echo "<form action='' method='POST' style='margin:0;'>
+              <input type='hidden' name='created_at' value='$created_at'>
+              <input type='hidden' name='idProduct' value='$product_id'>
+              <button type='submit' id='button-order-delete' name='favorite-delete'
+                      style='background-color:#f44336; color:#fff; border:none; padding:6px 23px; border-radius:4px; cursor:pointer;'>
+                      Delete
+              </button>
+          </form>";
+
+    echo "</div>"; // group-button
+    echo '</div>'; // btn-group
+    echo '</div>'; // product-card
+}
+
 }
 ?>
  

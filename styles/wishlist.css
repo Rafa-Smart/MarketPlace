@@ -109,16 +109,6 @@
   animation: fadeIn 0.3s ease-in-out;
 }
 
-@keyframes popupFade {
-  from {
-    opacity: 0;
-    transform: scale(0.85);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
 
 .popup-box,
 .popup-box-order,
@@ -190,3 +180,74 @@ button[type="submit"] {
 }
 
 
+/* overlay update */
+.overlay-update-wishlist {
+  display: none;
+  position: fixed;
+  top: 0px;
+  left: 0;
+  backdrop-filter: blur(4px);
+  width: 100%;
+  height: 50%;
+  background: rgba(0, 0, 0, 0.6);
+  justify-content: center;
+  align-items: center;
+  z-index: 999999;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+/* popup box update */
+.popup-box-update-wishlist {
+  background: #2a2a2a;
+  padding: 30px 10px;
+  border-radius: 14px;
+  width: 340px;
+  max-width: 60%;
+  color: white;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+  animation: popupFade 0.3s ease;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.popup-box-update-wishlist form {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.popup-box-update-wishlist input {
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  background-color: #f0f0f0;
+  color: #000;
+}
+
+.popup-box-update-wishlist button {
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.popup-box-update-wishlist button:hover {
+  filter: brightness(1.1);
+}
+
+@keyframes popupFade {
+  from {
+    opacity: 0;
+    transform: scale(0.85);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+
+
+/* ini testing */

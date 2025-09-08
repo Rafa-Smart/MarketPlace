@@ -13,6 +13,37 @@ global $connection;
 // nahh lalu si if ini akan diambil oleh si index.js, lalu di eksekusi disana, gituu
 // jadi data yang ad di then itu isinya adlah ini
 
+
+if (isset($_POST['tambah-product'])) {
+  $name = mysqli_real_escape_string($connection, $_POST['name']);
+  $price = (int) $_POST['price'];
+  $stock = (int) $_POST['stock'];
+  $category = mysqli_real_escape_string($connection, $_POST['category']);
+
+  // upload file
+  $targetDir = "uploads/";
+  if (!is_dir($targetDir))
+    mkdir($targetDir, 0777, true);
+
+  $fileName = time() . "_" . basename($_FILES["img"]["name"]);
+  $targetFile = $targetDir . $fileName;
+
+  if (move_uploaded_file($_FILES["img"]["tmp_name"], $targetFile)) {
+    $sql = "INSERT INTO tabel_products (name, price, stock, category, img) 
+            VALUES ('$name', '$price', '$stock', '$category', '$targetFile')";
+    if (mysqli_query($connection, $sql)) {
+      // redirect supaya data baru langsung muncul
+      header("Location: index.php");
+      exit;
+    } else {
+      echo "❌ Error: " . mysqli_error($connection);
+    }
+  } else {
+    echo "Upload gambar gagal!";
+  }
+}
+
+
 // makanya kita ubah menjadi res.text dulu
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["id"])) {
   $id = intval($_POST["id"]);
@@ -48,8 +79,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["id"])) {
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Product Page</title>
-  <link rel="stylesheet" href="styles/index.css?v=2">
-  <link rel="stylesheet" href="styles/navbar.css">
+  <link rel="stylesheet" href="styles/index.css?v=5">
+  <link rel="stylesheet" href="styles/navbar.css?v=2">
 
 </head>
 
@@ -57,12 +88,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["id"])) {
 
 
   <nav class="navbar">
-    <div class="logo">MyDarkShop</div>
+    <div class="logo">Khadafi Shop</div>
     <ul class="nav-links">
       <li><a href="#">Products</a></li>
       <li><a href="view/orders.php">Orders</a></li>
       <li><a href="view/favorite.php">Favorites</a></li>
       <li><a href="view/wishlist.php">Wishlist</a></li>
+      <li><button class="add-product" onclick="bukaAddProduct()">Add Product</button></li>
     </ul>
   </nav>
 
@@ -96,8 +128,50 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["id"])) {
     <div class="popup-box-favorite"></div>
   </div>
 
+  <!-- Popup Add Product -->
+  <div class="overlay" id="popup-add-product">
+    <div class="popup-box">
+      <form id="form-add-product" enctype="multipart/form-data" action="index.php" method="POST">
+        <div class="form-group">
+          <label for="name">Product Name:</label>
+          <input type="text" id="name" name="name" required>
+        </div>
 
-  <script src="scripts/index.js?v=2" defer></script>
+        <div class="form-group">
+          <label for="price">Price:</label>
+          <input type="number" id="price" name="price" required>
+        </div>
+
+        <div class="form-group">
+          <label for="stock">Stock:</label>
+          <input type="number" id="stock" name="stock" required>
+        </div>
+
+        <div class="form-group">
+          <label for="category">Category:</label>
+          <input type="text" id="category" name="category" required>
+        </div>
+
+        <div class="form-group">
+          <label for="img">Image:</label>
+          <input type="file" id="img" name="img" accept="image/*" required>
+          <!-- Preview -->
+          <div id="preview-container" style="margin-top:10px;">
+            <img id="preview-image" src="" alt="Preview"
+              style="max-width:50px; display:none; border:1px solid #555; border-radius:8px;" />
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" name="tambah-product">Add Product</button>
+          <button type="button" onclick="tutupAddProduct()">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+
+  <script src="scripts/index.js?v=3" defer></script>
 
 </body>
 
