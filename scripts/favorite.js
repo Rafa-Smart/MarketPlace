@@ -14,7 +14,8 @@ function pasBukaInfoFavorite(idProduct) {
     .then((res) => res.text())
     .then((data) => {
       document.querySelector(".popup-box-favorite").innerHTML =
-        data + "<br><button onclick='pasTutupInfo()'>Tutup</button>";
+        data +
+        "<button class='btn-close-popup' onclick='pasTutupInfo()'>Tutup</button>";
     })
     .catch((error) => console.error("Error:", error));
 }
@@ -85,7 +86,6 @@ function format() {
   return format;
 }
 
-
 // sekarang untuk masukin ke wishlistnya
 function buatWishlist(productId) {
   // disini pas si user klik buttno add wihslist, kita tampilkan popup box
@@ -106,7 +106,7 @@ function buatWishlist(productId) {
             </form>
     `;
   console.log("ini add to wishlist");
-   const popup = document.getElementById("popup-wishlist-favorite");
+  const popup = document.getElementById("popup-wishlist-favorite");
   console.log("Inner HTML:", popup.innerHTML);
 }
 

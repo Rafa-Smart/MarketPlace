@@ -62,7 +62,7 @@ function buatWishlist(productId) {
             <input type="number" id="priority-wishlist" name="priority-wishlist" placeholder='masukan nilai priority %' required>
             <input type="hidden" name="product_id" value="${productId}">
             <button type="submit" name="wishlist-now" class="btn order">Add to Wishlist</button>
-            <button type="button" onclick="tutupWishlist()">Cancel</button>
+            <button type="button" onclick="tutupWishlist()" class="button-cancel">Cancel</button>
             </form>
     `;
   console.log("ini add to wishlist");

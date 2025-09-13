@@ -26,21 +26,41 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["id"])) {
   $result = mysqli_query($connection, $query);
 
   if ($result && mysqli_num_rows($result) > 0) {
-
     $product = mysqli_fetch_assoc($result);
-    echo '<img src="' . htmlspecialchars($product["imgProduct"]) . '" style="max-width:100px;">';
-    echo "<h3>Id: " . $product["idProduct"] . "</h3>";
-    echo "<h3>Priority: " . $product["priorityProduct"] . "</h3>";
-    echo "<h3>" . $product["namaProduct"] . "</h3>";
-    echo "<p>Stock: " . $product["stockProduct"] . "</p>";
-    echo "<p>Amount: " . $product["amountProduct"] . "</p>";
-    echo "<p>Stok Now: " . $product["stockNow"] . "</p>";
-    echo "<p>Price: Rp " . number_format($product["priceProduct"], 0, ',', '.') . "</p>";
-    echo "<p>Price Total: Rp " . number_format($product["totalPrice"], 0, ',', '.') . "</p>";
-    echo "<p>Category: " . htmlspecialchars($product["categoryProduct"]) . "</p>";
-    echo "<p>Note: " . htmlspecialchars($product["notesProduct"]) . "</p>";
-    echo "<p>update_at: " . htmlspecialchars($product["created_at"]) . "</p>";
-    echo "<td>" . ($product["update_at"] ? $product["update_at"] : "belum diupdate") . "</td>";
+
+    $hasilGambar = $product["imgProduct"];
+
+
+    if (strpos($hasilGambar, 'uploads') !== false) {
+      $hasilGambar = '../' . $product["imgProduct"];
+    } else {
+      $hasilGambar = $product["imgProduct"];
+    }
+
+    echo '<div class="detail-card">';
+
+    // Kiri
+    echo '  <div class="detail-left">';
+    echo '    <img src="' . htmlspecialchars($hasilGambar) . '" alt="Product Image">';
+    echo '    <h2>' . htmlspecialchars($product["namaProduct"]) . '</h2>';
+    echo '    <p class="category">Kategori: ' . htmlspecialchars($product["categoryProduct"]) . '</p>';
+    echo '  </div>';
+
+    // Kanan
+    echo '  <div class="detail-right">';
+    echo '    <table class="detail-table">';
+    echo '      <tr><th>Stock</th><td>' . $product["stockProduct"] . '</td></tr>';
+    echo '      <tr><th>Amount</th><td>' . $product["amountProduct"] . '</td></tr>';
+    echo '      <tr><th>Stock Now</th><td>' . $product["stockNow"] . '</td></tr>';
+    echo '      <tr><th>Price</th><td>Rp ' . number_format($product["priceProduct"], 0, ',', '.') . '</td></tr>';
+    echo '      <tr><th>Total Price</th><td>Rp ' . number_format($product["totalPrice"], 0, ',', '.') . '</td></tr>';
+    echo '      <tr><th>Created At</th><td>' . htmlspecialchars($product["created_at"]) . '</td></tr>';
+    echo '      <tr><th>Updated At</th><td>' . ($product["update_at"] ? $product["update_at"] : "belum diupdate") . '</td></tr>';
+    echo '    </table>';
+    echo '  </div>';
+
+    echo '</div>'; // detail-card
+
   } else {
     echo "Produk tidak ditemukan.";
   }
@@ -56,8 +76,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["id"])) {
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Wihslist Page</title>
-  <link rel="stylesheet" href="../styles/wishlist.css?v=1">
-  <link rel="stylesheet" href="../styles/navbar.css?v=2">
+  <link rel="stylesheet" href="../styles/wishlist.css?v=9">
+  <link rel="stylesheet" href="../styles/navbar.css?v=7">
 
 </head>
 
@@ -117,7 +137,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["id"])) {
   </div>
 
 
-  <script src="../scripts/wishlist.js?v=6"></script>
+  <script src="../scripts/wishlist.js?v=2"></script>
 </body>
 
 </html>
@@ -223,8 +243,17 @@ function tampilProducts()
     $product_img = $row["imgProduct"];
     $created_at = $row["created_at"];
 
+    $hasilGambar = $row["imgProduct"];
+
+
+    if (strpos($hasilGambar, 'uploads') !== false) {
+      $hasilGambar = '../' . $row["imgProduct"];
+    } else {
+      $hasilGambar = $row["imgProduct"];
+    }
+
     echo '<div class="product-card">';
-    echo '<img src="' . $product_img . '" alt="Product">';
+    echo '<img src="' . $hasilGambar . '" alt="Product">';
     echo '<h3>' . $product_priority . ' %</h3>';
     echo '<h3>' . htmlspecialchars($product_name) . '</h3>';
     echo '<p>Rp ' . number_format($product_price, 0, ',', '.') . '</p>';

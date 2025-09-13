@@ -14,7 +14,7 @@ function pasBukaInfoWishlist(idProduct) {
     .then((res) => res.text())
     .then((data) => {
       document.querySelector(".popup-box-wishlist").innerHTML =
-        data + "<br><button onclick='pasTutupInfo()'>Tutup</button>";
+        data + "<button class='btn-close-popup' onclick='pasTutupInfo()'>Tutup</button>";
     })
     .catch((error) => console.error("Error:", error));
 }

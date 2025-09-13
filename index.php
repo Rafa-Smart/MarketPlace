@@ -79,8 +79,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["id"])) {
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Product Page</title>
-  <link rel="stylesheet" href="styles/index.css?v=5">
-  <link rel="stylesheet" href="styles/navbar.css?v=2">
+  <link rel="stylesheet" href="styles/index.css?v=7">
+  <link rel="stylesheet" href="styles/navbar.css?v=9">
 
 </head>
 
@@ -171,7 +171,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["id"])) {
   </div>
 
 
-  <script src="scripts/index.js?v=3" defer></script>
+  <script src="scripts/index.js?v=8" defer></script>
 
 </body>
 
@@ -202,7 +202,7 @@ function tampilProducts()
     echo '<div class="btn-group">';
     echo '<button type="submit" name="order-now" class="btn order" onclick="buatOrder(' . $product_id . ')">Order Now</button>';
     echo '<button type="submit" name="add-to-favorites" class="btn order" onclick="buatFavorite(' . $product_id . ')" >Add to Favorites</button>';
-    echo '<button type="button" name="add-to-wishlist" class="btn order" onclick="buatWishlist(' . $product_id . ')">Add to Wishlist</button>';
+    echo '<button type="button" name="add-to-wishlist" class="btn order" onclick="buatWishlist('. $product_id .')">Add to Wishlist</button>';
     echo '<button onclick="pasBukaInfo(' . $product_id . ')" class="btn order">Info Product</button>';
 
     echo '</div>';

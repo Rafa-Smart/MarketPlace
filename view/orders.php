@@ -11,8 +11,8 @@ global $connection;
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Product Page</title>
-  <link rel="stylesheet" href="../styles/orders.css?v=3">
-  <link rel="stylesheet" href="../styles/navbar.css?v=2">
+  <link rel="stylesheet" href="../styles/orders.css?v=5">
+  <link rel="stylesheet" href="../styles/navbar.css?v=5">
 </head>
 
 <body>
